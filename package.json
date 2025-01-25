@@ -1,0 +1,21 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next --turbopack",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^15.1.6",
+    "nextra": "^4.0.8",
+    "nextra-theme-docs": "^4.0.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

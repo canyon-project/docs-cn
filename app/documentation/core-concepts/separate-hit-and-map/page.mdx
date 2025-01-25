@@ -1,0 +1,70 @@
+import { Callout } from 'nextra/components'
+
+# 分离hit和map
+
+在CI中收集参与babel编译产生的初始覆盖率源文件
+
+## 原因
+
+1. __收集完整的参与编译文件__: 在编译后过程中，通过`babel-plugin-canyon`插件，分析解析
+每个参与编译文件的覆盖初始文件，并保存至`.canyon_out`文件夹。
+
+2. __提前收集，减轻压力__: 当您没有上报初始覆盖率文件，UI自动化测试中都会上报这些覆盖率文件
+这会产生巨大的传输压力。提前收集可以减少90%以上的传输压力。
+
+> [!TIP]
+>
+> 这不是必须的，但是如果您需要准确、稳定的收集覆盖率数据，强烈建议您配置。
+
+## 上报初始覆盖率数据
+
+babel-plugin-canyon插件在编译时会生成参与编译文件的原始出覆盖率文件并保存至.canyon_output文件夹，我们提供了canyon-uploader的命令行工具，您可在CI中上报至Canyon服务端，
+可参考例子[canyon-babel-template](https://github.com/canyon-project/canyon-babel-template)🌰
+
+```yml filename=".github/workflows/report-canyon-output.yml" {19,20} copy
+name: Report Canyon Output
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # 可以根据项目需求修改 Node.js 版本
+      - name: Install dependencies
+        run: npm install
+      - name: Generate output
+        run: npm run build
+
+      # 上报 .canyon_output 文件内容
+      - name: Report output
+        run: canyon-uploader --dsn=https://canyonjs.org
+```
+
+## 更新 babel 插件
+
+配置 keepMap 选项为 false
+
+```js filename="babel.config.js" {7} copy
+module.exports = {
+  plugins: [
+    'istanbul',
+    [
+      'canyon',
+      {
+        keepMap: false
+      }
+    ]
+  ]
+};
+```
+
+## 准备好了
+
+此时检查页面的window.coverage对象，看截图。window.coverage中已经没有map数据，这样
+可以大大减轻UI自动化覆盖率收集过程中的大量传输成本。
+
+![](/jietu1.png)
