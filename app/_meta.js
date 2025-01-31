@@ -3,12 +3,17 @@ export default {
         type: "page",
         display: "hidden",
         "title": "Introduction",
-        // "type": "page",
-        // "hidden": true,
-        // "display": "hidden"
+      theme: {
+        // sidebar: true,
+        toc: false,
+      }
     },
     documentation: {
-        title: "Documentation",
+        title: "文档",
         type: "page",
-    }
+    },
+  support: {
+    title: "支持",
+    type: "page",
+  },
 };
