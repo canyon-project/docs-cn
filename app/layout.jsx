@@ -52,8 +52,9 @@ export default async function RootLayout({ children }) {
         <Head
             // ... Your additional head options
         >
+          <link rel="icon" type="image/svg+xml" href="/logo.svg" />
           <title>
-            Canyon
+            JavaScript code coverage solution - CANYON
           </title>
             {/* Your additional tags should be passed as `children` of `<Head>` element */}
         </Head>
