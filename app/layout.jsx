@@ -15,6 +15,9 @@ export const metadata = {
 // const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
 const navbar = (
     <Navbar
+      children={
+      <div>asaafgassa</div>
+      }
       projectLink="https://github.com/canyon-project/canyon"
       projectIcon={
         <GitHubIcon height="24" />

@@ -1,0 +1,84 @@
+import { Steps, Callout, Cards } from 'nextra/components'
+
+# 上报第一个覆盖率数据
+
+## 从模板快速开始
+
+### 部署到 Vercel
+
+您可以通过点击以下链接，创建自己的 Canyon 演示项目并部署到 Vercel：
+
+<a
+  className="mt-3 inline-flex"
+  target="_blank"
+  href="https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fcanyon-project%2Fcanyon-babel-template&showOptionalTeamCreation=false"
+>
+  ![](https://vercel.com/button)
+</a>
+
+### Fork 模板
+
+您也可以手动 Fork [模板仓库](https://github.com/canyon-project/canyon-babel-template)。
+
+## 作为新项目开始
+
+<Steps>
+  ### 安装
+
+  在前端工程化和模块化开发中，Babel 是不可或缺的。如果您的项目使用 Babel，只需安装两个 Babel 插件，即可快速开始。
+
+  ```sh npm2yarn
+  npm install babel-plugin-istanbul babel-plugin-canyon -D
+  ```
+
+在 [Babel 配置文件](https://babeljs.io/docs/config-files#configuration-file-types) 中添加 [`istanbul`](https://www.npmjs.com/package/babel-plugin-istanbul) 和 [`canyon`](https://www.npmjs.com/package/babel-plugin-canyon) 插件：
+  ```js {3,4}
+  module.exports = {
+    plugins: process.env.CI_COMMIT_REF_NAME === 'test-coverage' ? [
+      'istanbul',
+      'canyon',
+    ] : [],
+  };
+  ```
+<Callout>
+  这些插件可能会降低开发环境的编译速度，因此需要控制插件的生效条件。
+</Callout>
+
+配置完成后，启动项目并在控制台打印 **window._\_coverage\_\_**。如果输出与下图一致，则表示代码插桩成功。
+
+![coverage-canyon-console](/static/documentation/getting-started/first-coverage/coverage-canyon-console.png)
+
+### CI 环境变量
+
+在 CI 环境中，我们需要配置一些环境变量以便上报覆盖率数据。
+
+  1. DSN 和 REPORTER
+
+  - **DSN**：覆盖率数据上报 API，\{\{url\}\}/coverage/client。
+  - **REPORTER**：用户 Token，可在用户设置页面查看。
+
+![setting](/static/documentation/getting-started/first-coverage/setting.png)
+
+  2. 配置 CI 平台变量
+
+![gitlab](/static/documentation/getting-started/first-coverage/gitlab-var-config.png)
+
+<Callout type="info" emoji="ℹ️">
+  其中，项目 ID、分支和 SHA 无需手动配置，Canyon 插件会自动检测流水线环境变量。
+</Callout>
+
+### 上报覆盖率数据
+
+此时，覆盖率数据已存储在浏览器中。随着用户操作或 UI 自动化测试的执行，数据会不断累积。我们需要将这些数据上报到 Canyon 后端服务。
+
+<Cards>
+  <Cards.Card
+    title="UI 自动化测试"
+    href="/documentation/end-to-end-testing/playwright"
+  />
+  <Cards.Card
+    title="手动测试"
+    href="/documentation/ecosystem/tools/canyon-extension"
+  />
+</Cards>
+</Steps>

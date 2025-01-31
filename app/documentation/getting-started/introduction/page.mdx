@@ -1,0 +1,43 @@
+# 介绍
+
+## 概述
+
+Canyon 通过简单的 Babel 配置，实现 JavaScript 覆盖率数据收集和实时报告生成，解决了端到端测试中的覆盖率收集难题。
+
+![](/static/documentation/getting-started/introduction/home-screen.png)
+
+## 自托管
+
+如果您希望完全掌控您的覆盖率数据和测试数据，您可以在自己的基础设施上[自托管](/documentation/self-host/community-edition/prerequisites) Canyon。
+
+## 生态系统
+
+| 项目                         | 状态                                                        | 描述                                                     |
+| --------------------------- | ------------------------------------------------------------ |---------------------------------------------------------|
+| [babel-plugin-canyon]       | [![babel-plugin-canyon-status]][babel-plugin-canyon-package] | Babel 插件，用于检测流水线环境变量                      |
+| [canyon-uploader]           | [![canyon-uploader-status]][canyon-uploader-package]         | 扫描本地 `.canyon_output` 数据并上传到服务器           |
+| [canyon-extension]          | [![canyon-extension-status]][canyon-extension-package]       | Chrome 插件，用于手动上报覆盖率数据                     |
+
+[babel-plugin-canyon]: https://github.com/canyon-project/babel-plugin-canyon
+[vite-plugin-canyon]: https://github.com/canyon-project/vite-plugin-canyon
+[canyon-uploader]: https://github.com/canyon-project/canyon-uploader
+[canyon-extension]: https://github.com/canyon-project/canyon-extension
+[babel-plugin-canyon-status]: https://img.shields.io/npm/v/babel-plugin-canyon.svg
+[vite-plugin-canyon-status]: https://img.shields.io/npm/v/vite-plugin-canyon.svg
+[canyon-uploader-status]: https://img.shields.io/npm/v/canyon-uploader.svg
+[canyon-extension-status]: https://img.shields.io/chrome-web-store/v/omnpafdjidgpdmlimbangcjjaaodbeof.svg
+[babel-plugin-canyon-package]: https://npmjs.com/package/babel-plugin-canyon
+[vite-plugin-canyon-package]: https://npmjs.com/package/babel-plugin-vite
+[canyon-uploader-package]: https://npmjs.com/package/canyon-uploader
+[canyon-extension-package]: https://chrome.google.com/webstore/detail/canyon/omnpafdjidgpdmlimbangcjjaaodbeof
+
+## 架构
+
+以下图示展示了 Canyon 及其生态系统的一些组件架构：
+
+1. Babel 插件在 CI/CD 流水线中完成代码插桩。
+2. 项目发布到测试环境，用户可以选择 UI 自动化或手动测试来触发插桩代码探针。
+3. 生成的覆盖率数据上报至 Canyon 服务器。
+4. Canyon 服务器消费数据，并结合 GitLab 提供的源代码信息生成覆盖率报告。
+
+![](/static/documentation/getting-started/introduction/architecture.png)
