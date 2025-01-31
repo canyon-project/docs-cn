@@ -5,6 +5,7 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import Image from "next/image";
 import Link from "next/link";
+import {GitHubIcon} from "nextra/icons";
 
 export const metadata = {
     // Define your metadata here
@@ -14,6 +15,10 @@ export const metadata = {
 // const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
 const navbar = (
     <Navbar
+      projectLink="https://github.com/canyon-project/canyon"
+      projectIcon={
+        <GitHubIcon height="24" />
+      }
         logo={
           <Link href={'/'}>
             <div
@@ -47,6 +52,9 @@ export default async function RootLayout({ children }) {
         <Head
             // ... Your additional head options
         >
+          <title>
+            Canyon
+          </title>
             {/* Your additional tags should be passed as `children` of `<Head>` element */}
         </Head>
         <body>
