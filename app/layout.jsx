@@ -3,6 +3,8 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
     // Define your metadata here
@@ -12,7 +14,21 @@ export const metadata = {
 // const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
 const navbar = (
     <Navbar
-        logo={<b>Canyon</b>}
+        logo={
+          <Link href={'/'}>
+            <div
+              className="flex hover:nx-opacity-75 items-center"
+            >
+              <img src="/logo.svg" style={{ width: "32px" }} alt="" />
+              <div className="mx-2 font-extrabold hidden md:inline select-none">
+                CANYON
+              </div>
+              <div className="text-gray-600 font-normal hidden lg:!inline whitespace-no-wrap">
+                JavaScript code coverage solution
+              </div>
+            </div>
+          </Link>
+        }
         // ... Your additional navbar options
     />
 )
