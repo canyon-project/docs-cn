@@ -2,23 +2,11 @@ import { Steps, Callout, Cards } from "nextra/components";
 
 # 上报第一个覆盖率数据
 
-## 从模板快速开始
-
-### 部署到 Vercel
-
-您可以通过点击以下链接，创建自己的 Canyon 演示项目并部署到 Vercel：
-
-<a
-  className="mt-3 inline-flex"
-  target="_blank"
-  href="https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fcanyon-project%2Fcanyon-babel-template&showOptionalTeamCreation=false"
+> [!NOTE]
 >
-  ![](https://vercel.com/button)
-</a>
+> Canyon 提供[常见框架的安装指南](/documentation/installation/getting-started)，帮助您快速上手。
 
-### Fork 模板
-
-您也可以手动 Fork [模板仓库](https://github.com/canyon-project/canyon-babel-template)。
+跟着以下步骤完成第一个覆盖率数据上报：
 
 ## 作为新项目开始
 
@@ -33,18 +21,14 @@ npm install babel-plugin-istanbul babel-plugin-canyon -D
 
 在 [Babel 配置文件](https://babeljs.io/docs/config-files#configuration-file-types) 中添加 [`istanbul`](https://www.npmjs.com/package/babel-plugin-istanbul) 和 [`canyon`](https://www.npmjs.com/package/babel-plugin-canyon) 插件：
 
-```js {3,4}
-module.exports = {
-  plugins:
-    process.env.CI_COMMIT_REF_NAME === "test-coverage"
-      ? ["istanbul", "canyon"]
-      : [],
-};
-```
-
-<Callout>
-  这些插件可能会降低开发环境的编译速度，因此需要控制插件的生效条件。
-</Callout>
+  ```js {3,4} copy
+  module.exports = {
+    plugins: [
+      'canyon',
+      'istanbul'
+      ],
+  };
+  ```
 
 配置完成后，启动项目并在控制台打印 **window.\_\_coverage\_\_**。如果输出与下图一致，则表示代码插桩成功。
 
@@ -56,8 +40,8 @@ module.exports = {
 
 1. DSN 和 REPORTER
 
-- **DSN**：覆盖率数据上报 API，\{\{url\}\}/coverage/client。
-- **REPORTER**：用户 Token，可在用户设置页面查看。
+- **DSN**：覆盖率数据上报的服务地址，\{\{url\}\}/coverage/client，其中 \{\{url\}\} 为 Canyon 服务地址。
+- **REPORTER**：用户 token，可在用户设置页面查看。
 
 ![setting](/static/documentation/getting-started/first-coverage/setting.png)
 
@@ -69,11 +53,31 @@ module.exports = {
   其中，项目 ID、分支和 SHA 无需手动配置，Canyon 插件会自动检测流水线环境变量。
 </Callout>
 
+  ### 更新babel插件生效条件
+
+  在 持续集成 阶段，我们需要控制插件生效的条件，以防止在生产分支插桩。
+
+  ```js {3,4} copy
+  module.exports = {
+  plugins: [
+  'canyon',
+  'istanbul'
+  ],
+};
+  ```
+
+  提交代码
+
 ### 上报覆盖率数据
+
+  等待持续集成完成后，页面发布到测试环境。
 
 此时，覆盖率数据已存储在浏览器中。随着用户操作或 UI 自动化测试的执行，数据会不断累积。我们需要将这些数据上报到 Canyon 后端服务。
 
-<Cards>
+  ![coverage-canyon-console](/static/documentation/getting-started/first-coverage/coverage-canyon-console.png)
+
+
+  <Cards>
   <Cards.Card
     title="UI 自动化测试"
     href="/documentation/end-to-end-testing/playwright"
