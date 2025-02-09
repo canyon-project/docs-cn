@@ -1,6 +1,6 @@
 # Next.js
 
-import {Steps} from "nextra/components";
+import { Steps } from "nextra/components";
 
 安装和配置 Next.js 。
 
@@ -13,8 +13,6 @@ import {Steps} from "nextra/components";
   npm create create-next-app@latest
   ```
 
-
-
   ### 添加 canyon 及其配置
 
   > [!NOTE]
@@ -23,7 +21,7 @@ import {Steps} from "nextra/components";
 
 
   ```sh npm2yarn copy
-  npm install babel-plugin-istanbul babel-plugin-canyon -D
+  npm install swc-plugin-coverage-instrument swc-plugin-canyon -D
   ```
 
   ### 配置 swc 插件
@@ -31,33 +29,34 @@ import {Steps} from "nextra/components";
   ``` js copy
   /** @type {import('next').NextConfig} */
   const nextConfig = {
-  experimental: {
-  swcPlugins: [
-  [
-  'swc-plugin-coverage-instrument', {},
-  ],
-  [
-  // TODO: 目前SWC不支持插件内读取运行时环境变量，需要显式传入。已向SWC团队提交Issue，待解决后可删除下面的配置 https://github.com/swc-project/swc/issues/9668
-  'swc-plugin-canyon', {
-  projectID: process.env.CI_PROJECT_ID,
-  sha: process.env.CI_COMMIT_SHA,
-  dsn: process.env.DSN,
-  reporter: process.env.REPORTER,
-  branch: process.env.CI_COMMIT_BRANCH,
-  instrumentCwd: process.cwd(),
-  // compareTarget: 'dev', //可选
-},
-  ]
-  ],
-},
-};
+    experimental: {
+      swcPlugins: [
+        [
+          'swc-plugin-coverage-instrument', {},
+        ],
+        [
+          // TODO: 目前SWC不支持插件内读取运行时环境变量，需要显式传入。
+          // 已向SWC团队提交Issue，待解决后可删除下面的配置 
+          // https://github.com/swc-project/swc/issues/9668
+          'swc-plugin-canyon', {
+            projectID: process.env.CI_PROJECT_ID,
+            sha: process.env.CI_COMMIT_SHA,
+            dsn: process.env.DSN,
+            reporter: process.env.REPORTER,
+            branch: process.env.CI_COMMIT_BRANCH,
+            instrumentCwd: process.cwd(),
+            // compareTarget: 'dev', //可选
+          },
+        ]
+      ],
+    },
+  };
 
   export default nextConfig;
-
   ```
 
   ### 就是这样
-
+  继续查看 [上报第一个覆盖率数据 - 检查](/documentation/getting-started/first-coverage#%E6%A3%80%E6%9F%A5)。
 </Steps>
 
-继续查看 [上报第一个覆盖率数据](/documentation/getting-started/first-coverage)。
+
