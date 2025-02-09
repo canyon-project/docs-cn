@@ -1,4 +1,4 @@
-import { Steps, Callout, Cards } from 'nextra/components'
+import { Steps, Callout, Cards } from "nextra/components";
 
 # 上报第一个覆盖率数据
 
@@ -25,26 +25,28 @@ import { Steps, Callout, Cards } from 'nextra/components'
 <Steps>
   ### 安装
 
-  在前端工程化和模块化开发中，Babel 是不可或缺的。如果您的项目使用 Babel，只需安装两个 Babel 插件，即可快速开始。
+在前端工程化和模块化开发中，Babel 是不可或缺的。如果您的项目使用 Babel，只需安装两个 Babel 插件，即可快速开始。
 
-  ```sh npm2yarn
-  npm install babel-plugin-istanbul babel-plugin-canyon -D
-  ```
+```sh npm2yarn
+npm install babel-plugin-istanbul babel-plugin-canyon -D
+```
 
 在 [Babel 配置文件](https://babeljs.io/docs/config-files#configuration-file-types) 中添加 [`istanbul`](https://www.npmjs.com/package/babel-plugin-istanbul) 和 [`canyon`](https://www.npmjs.com/package/babel-plugin-canyon) 插件：
-  ```js {3,4}
-  module.exports = {
-    plugins: process.env.CI_COMMIT_REF_NAME === 'test-coverage' ? [
-      'istanbul',
-      'canyon',
-    ] : [],
-  };
-  ```
+
+```js {3,4}
+module.exports = {
+  plugins:
+    process.env.CI_COMMIT_REF_NAME === "test-coverage"
+      ? ["istanbul", "canyon"]
+      : [],
+};
+```
+
 <Callout>
   这些插件可能会降低开发环境的编译速度，因此需要控制插件的生效条件。
 </Callout>
 
-配置完成后，启动项目并在控制台打印 **window._\_coverage\_\_**。如果输出与下图一致，则表示代码插桩成功。
+配置完成后，启动项目并在控制台打印 **window.\_\_coverage\_\_**。如果输出与下图一致，则表示代码插桩成功。
 
 ![coverage-canyon-console](/static/documentation/getting-started/first-coverage/coverage-canyon-console.png)
 
@@ -52,14 +54,14 @@ import { Steps, Callout, Cards } from 'nextra/components'
 
 在 CI 环境中，我们需要配置一些环境变量以便上报覆盖率数据。
 
-  1. DSN 和 REPORTER
+1. DSN 和 REPORTER
 
-  - **DSN**：覆盖率数据上报 API，\{\{url\}\}/coverage/client。
-  - **REPORTER**：用户 Token，可在用户设置页面查看。
+- **DSN**：覆盖率数据上报 API，\{\{url\}\}/coverage/client。
+- **REPORTER**：用户 Token，可在用户设置页面查看。
 
 ![setting](/static/documentation/getting-started/first-coverage/setting.png)
 
-  2. 配置 CI 平台变量
+2. 配置 CI 平台变量
 
 ![gitlab](/static/documentation/getting-started/first-coverage/gitlab-var-config.png)
 

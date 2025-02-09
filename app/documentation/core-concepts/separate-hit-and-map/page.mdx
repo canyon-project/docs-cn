@@ -1,4 +1,4 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # 分离hit和map
 
@@ -6,11 +6,11 @@ import { Callout } from 'nextra/components'
 
 ## 原因
 
-1. __收集完整的参与编译文件__: 在编译后过程中，通过`babel-plugin-canyon`插件，分析解析
-每个参与编译文件的覆盖初始文件，并保存至`.canyon_out`文件夹。
+1. **收集完整的参与编译文件**: 在编译后过程中，通过`babel-plugin-canyon`插件，分析解析
+   每个参与编译文件的覆盖初始文件，并保存至`.canyon_out`文件夹。
 
-2. __提前收集，减轻压力__: 当您没有上报初始覆盖率文件，UI自动化测试中都会上报这些覆盖率文件
-这会产生巨大的传输压力。提前收集可以减少90%以上的传输压力。
+2. **提前收集，减轻压力**: 当您没有上报初始覆盖率文件，UI自动化测试中都会上报这些覆盖率文件
+   这会产生巨大的传输压力。提前收集可以减少90%以上的传输压力。
 
 > [!TIP]
 >
@@ -33,7 +33,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # 可以根据项目需求修改 Node.js 版本
+          node-version: "18" # 可以根据项目需求修改 Node.js 版本
       - name: Install dependencies
         run: npm install
       - name: Generate output
@@ -51,14 +51,14 @@ jobs:
 ```js filename="babel.config.js" {7} copy
 module.exports = {
   plugins: [
-    'istanbul',
+    "istanbul",
     [
-      'canyon',
+      "canyon",
       {
-        keepMap: false
-      }
-    ]
-  ]
+        keepMap: false,
+      },
+    ],
+  ],
 };
 ```
 
