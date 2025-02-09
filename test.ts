@@ -1,12 +1,3 @@
-# Playwright
-
-在 Playwright 中，获取上下文，在用例执行时将覆盖率数据写入到本地文件，最后使用 canyon-uploader 工具聚合上报。
-
-## 覆盖率数据写入本地文件
-
-以下是 nodejs 代码示例：
-
-```ts copy
 import * as fs from 'fs';
 import * as path from 'path';
 import {test as baseTest} from '@playwright/test';
@@ -36,13 +27,3 @@ export const test = baseTest.extend({
 
 export const expect = test.expect;
 
-
-```
-
-## 聚合上报
-
-使用 canyon-uploader 工具聚合上报，具体使用方式请查看 [canyon-uploader](/documentation/ecosystem/canyon-uploader) 文档。
-
-```bash copy
-./canyon-uploader --dsn=https://canyonjs.org
-```
