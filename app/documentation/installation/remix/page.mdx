@@ -1,0 +1,56 @@
+# Remix
+
+import { Steps } from "nextra/components";
+
+安装和配置 Next.js 。
+
+<Steps>
+
+  ### 创建项目
+  首先使用以下命令创建一个新的 React 项目 `next.js` 。
+
+  ```sh npm2yarn copy
+  npm create create-remix@latest
+  ```
+
+  ### 添加 canyon 及其配置
+
+  > [!NOTE]
+  >
+  > remix 默认使用 vite 作为构建工具，所以我们需要用到vite-plugin-istanbul的插桩工具。
+
+
+  ```sh npm2yarn copy
+  npm install vite-plugin-istanbul vite-plugin-canyon -D
+  ```
+
+  ### 配置 vite 插件
+
+  ``` js copy
+  import { vitePlugin as remix } from "@remix-run/dev";
+  import { defineConfig } from "vite";
+  import tsconfigPaths from "vite-tsconfig-paths";
+  import Istanbul from 'vite-plugin-istanbul'
+  import Canyon from 'vite-plugin-canyon'
+
+  export default defineConfig({
+    plugins: [
+    remix({
+    ignoredRouteFiles: ["**/*.css"],
+  }),
+    tsconfigPaths(),
+    Istanbul(),
+    Canyon({
+    // 设置对比分支
+    compareTarget: "main",
+  }),
+    ],
+  });
+
+  ```
+
+  ### 就是这样
+  继续查看 [上报第一个覆盖率数据 - 检查](/documentation/getting-started/first-coverage#%E6%A3%80%E6%9F%A5)。
+</Steps>
+
+

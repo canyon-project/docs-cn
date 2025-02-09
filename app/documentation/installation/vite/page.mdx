@@ -1,0 +1,65 @@
+# Vite
+
+import { Steps } from "nextra/components";
+
+安装和配置 Vite 。
+
+<Steps>
+
+  ### 创建项目
+  首先使用以下命令创建一个新的 React 项目 `vite` 。
+
+  > [!NOTE]
+  > 目前只支持 react
+
+  ```sh npm2yarn copy
+  npm create vite@latest
+  ```
+
+  ### 添加 canyon 及其配置
+
+  > [!NOTE]
+  >
+  > 最新next.js编译器默认使用swc，有关babel插件的配置，请查看[这里](https://nextjs.org/docs/advanced-features/customizing-babel-config)。
+
+
+  ```sh npm2yarn copy
+  npm install swc-plugin-coverage-instrument swc-plugin-canyon -D
+  ```
+
+  ### 配置 swc 插件
+
+  ``` js copy
+  /** @type {import('next').NextConfig} */
+  const nextConfig = {
+    experimental: {
+      swcPlugins: [
+        [
+          'swc-plugin-coverage-instrument', {},
+        ],
+        [
+          // TODO: 目前SWC不支持插件内读取运行时环境变量，需要显式传入。
+          // 已向SWC团队提交Issue，待解决后可删除下面的配置
+          // https://github.com/swc-project/swc/issues/9668
+          'swc-plugin-canyon', {
+            projectID: process.env.CI_PROJECT_ID,
+            sha: process.env.CI_COMMIT_SHA,
+            dsn: process.env.DSN,
+            reporter: process.env.REPORTER,
+            branch: process.env.CI_COMMIT_BRANCH,
+            instrumentCwd: process.cwd(),
+            // compareTarget: 'dev', //可选
+          },
+        ]
+      ],
+    },
+  };
+
+  export default nextConfig;
+  ```
+
+  ### 就是这样
+  继续查看 [上报第一个覆盖率数据 - 检查](/documentation/getting-started/first-coverage#%E6%A3%80%E6%9F%A5)。
+</Steps>
+
+
