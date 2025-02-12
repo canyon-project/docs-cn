@@ -16,14 +16,14 @@ export default {
     title: "支持",
     type: "page",
   },
-  company: {
-    title: "语言",
-    type: "menu",
-    items: {
-      en: {
-        title: "English",
-        href: "https://docs.canyonjs.org",
-      },
-    },
-  },
+  // company: {
+  //   title: "语言",
+  //   type: "menu",
+  //   items: {
+  //     en: {
+  //       title: "English",
+  //       href: "https://docs.canyonjs.org",
+  //     },
+  //   },
+  // },
 };

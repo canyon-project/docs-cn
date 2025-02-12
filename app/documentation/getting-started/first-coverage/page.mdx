@@ -1,6 +1,6 @@
 import { Steps, Callout, Cards } from "nextra/components";
 
-# 上报第一个覆盖率数据
+# 第一个覆盖率数据
 
 > [!NOTE]
 >
@@ -13,7 +13,7 @@ import { Steps, Callout, Cards } from "nextra/components";
 <Steps>
   ### 安装
 
-在前端工程化和模块化开发中，Babel 是不可或缺的。如果您的项目使用 Babel，只需安装两个 Babel 插件，即可快速开始。
+在前端工程化和模块化开发中离不开Babel，对于Babel项目只需安装两个Babel插件，即可快速开始。
 
 ```sh npm2yarn
 npm install babel-plugin-istanbul babel-plugin-canyon -D
@@ -21,7 +21,7 @@ npm install babel-plugin-istanbul babel-plugin-canyon -D
 
 在 [Babel 配置文件](https://babeljs.io/docs/config-files#configuration-file-types) 中添加 [`istanbul`](https://www.npmjs.com/package/babel-plugin-istanbul) 和 [`canyon`](https://www.npmjs.com/package/babel-plugin-canyon) 插件：
 
-  ```js {3,4} copy
+  ```js filename="babel.config.js" {3,4} copy
   module.exports = {
     plugins: [
       'canyon',
@@ -42,8 +42,8 @@ npm install babel-plugin-istanbul babel-plugin-canyon -D
 
 > [!TIP]
 >
-> canyon会在编译时侦测流水线变量，我们适配了多个[流水线供应商](/test)。<br/>
-> 没有您的流水线供应商？尝试[显式配置](/test)。
+> canyon会在编译时侦测流水线变量，我们适配了多个[流水线供应商](/documentation/reference/provider)。<br/>
+> 没有您的流水线供应商？尝试[显式配置](/documentation/ecosystem/babel-plugin-canyon#配置)。
 
 
 1. `DSN` 和 `REPORTER`
@@ -61,26 +61,29 @@ npm install babel-plugin-istanbul babel-plugin-canyon -D
 
   ### 更新babel插件生效条件
 
-  在 持续集成 阶段，我们需要控制插件生效的条件，以防止在生产分支插桩。
+  __在 CI 阶段，我们需要控制插件生效的条件，以防止在生产分支插桩。__
 
-  ```js {3,4} copy
+  ```js {2,3} copy
   module.exports = {
-  plugins: [
-  'canyon',
-  'istanbul'
-  ],
-};
+    plugins: (process.env.CI &&
+              process.env.CI_COMMIT_REF_NAME !== 'release')
+              ? [
+                'canyon',
+                'istanbul'
+              ]:[],
+  };
   ```
-
-  提交代码
 
   ### 上报覆盖率数据
 
-  等待持续集成完成后，页面发布到测试环境。
+  等待 CI 完成后，页面发布到测试环境。
 
-  此时，覆盖率数据已存储在浏览器中。随着用户操作或 UI 自动化测试的执行，数据会不断累积。我们需要将这些数据上报到 Canyon 后端服务。
+  此时，覆盖率数据已存储在浏览器中。随着用户操作或UI自动化测试的执行，window.__coverage___数据会不断累积。
 
-  上报您的覆盖率数据
+  将这些数据准确无误的上报至 Canyon 服务端，即可实现覆盖率数据的实时展示。
+
+
+  以下是上报覆盖率数据的几种方式：
 
   <Cards>
   <Cards.Card
@@ -89,7 +92,7 @@ npm install babel-plugin-istanbul babel-plugin-canyon -D
   />
   <Cards.Card
     title="手动测试"
-    href="/documentation/ecosystem/tools/canyon-extension"
+    href="/documentation/ecosystem/canyon-extension"
   />
 </Cards>
 </Steps>

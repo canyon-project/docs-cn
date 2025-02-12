@@ -18,8 +18,7 @@ import { Callout } from "nextra/components";
 
 ## 上报初始覆盖率数据
 
-babel-plugin-canyon插件在编译时会生成参与编译文件的原始出覆盖率文件并保存至.canyon_output文件夹，我们提供了canyon-uploader的命令行工具，您可在CI中上报至Canyon服务端，
-可参考例子[canyon-babel-template](https://github.com/canyon-project/canyon-babel-template)🌰
+babel-plugin-canyon插件在编译时会生成参与编译文件的原始出覆盖率文件并保存至.canyon_output文件夹，我们提供了canyon-uploader的命令行工具，您可在CI中上报至Canyon服务端。
 
 ```yml filename=".github/workflows/report-canyon-output.yml" {19,20} copy
 name: Report Canyon Output

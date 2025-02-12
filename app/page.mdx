@@ -10,10 +10,10 @@
 </h1>
 
 <span style={{ textAlign: "center", fontSize: "1.25rem", margin: "1rem 0" }}>
-  更轻松地收集 JavaScript 覆盖率数据
+  更准确的收集 JavaScript 覆盖率数据
 </span>
 
-Canyon（法语意为 "快速的"，发音 /vit/，发音同 "veet"） 通过简单的 Babel 配置，实现 JavaScript 覆盖率数据的收集和实时报告生成，解决端到端测试中的覆盖率收集难题。
+Canyon（意为 “峡谷”，发音 /ˈkænjən/）通过简单的 Babel 配置即可实现 JavaScript 覆盖率收集和实时报告生成，解决了端到端测试中的覆盖率收集难题。
 
 <div className="mt-16 mb-20 text-center">
   [快速开始](/documentation/getting-started/introduction) · [GitHub
@@ -22,12 +22,13 @@ Canyon（法语意为 "快速的"，发音 /vit/，发音同 "veet"） 通过简
 
 ## 功能特点
 
-Canyon 专为端到端测试覆盖率收集而设计，提供以下功能：
+Canyon专为JavaScript端到端测试覆盖率收集而设计，具有以下功能特点：
 
-- **实时聚合**
-- **CI/CD 集成**
-- **支持 UI 自动化测试与手动测试**
-- **生产环境覆盖率数据收集**
+- [准确高效](/documentation/core-concepts/separate-hit-and-map)：通过分离hit、map，编译时生成初始覆盖率数据，准确高效的收集覆盖率数据
+- [SourceMap](/documentation/core-concepts/restore-source-code-coverage)：准确的源码覆盖率还原
+- [构建工具](/documentation/installation/getting-started)：提供next.js、vite、webpack等常见构建工具的覆盖率方案
+- [自动化框架](/documentation/end-to-end-testing/getting-started)：提供常见UI自动化框架集成方案
+- [CI提供商](/documentation/reference/provider)：适配常见CI提供商（Github Actions、GitLab Runner），侦测CI环境变量
 
 ## 社区
 

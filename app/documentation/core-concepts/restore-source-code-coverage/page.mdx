@@ -1,6 +1,6 @@
 # 还原源码覆盖率
 
-前端应用程序编译形态各异，很多情况下是经过预编译后的 AST 交由 babel 进行转换，这样导致覆盖率无法直接映射到源码上，因此我们需要还原源码覆盖率。
+前端应用编译形态各异，很多情况下是经过预编译后的 AST 交由 babel 进行转换，这样导致覆盖率无法直接映射到源码上，因此我们需要还原源码覆盖率。
 
 ## Source Map
 
@@ -9,9 +9,9 @@
 
 大多数情况下，您不需要手动获取 sourceMap 文件，因为大多数构建工具都会 `预编译后的 AST 交由 babel 进行转换` 的这个过程中传递了 sourceMap 文件。
 
-但是在某些情况下，您可能需要手动获取 sourceMap 文件。
+但是在某些情况下，您可能需要配置 sourceMap 文件。
 
-## 需要生成 sourceMap 的情况
+## 开启 sourceMap 选项的情况
 
 ```js filename="webpack.config.js" {4}
 const path = require('path');
@@ -48,14 +48,14 @@ module.exports = {
 
 当您的sourceMap生成的方式为以下情况时，您需要手动设置sourceMap。
 
-| 分类              | devtool                       | 是否能定位到错误源文件   | 报错代码是否与源代码完全一致 | 描述                                    |
-|-------------------|-------------------------------|--------------------------|-----------------------------|-----------------------------------------|
-| 生成source map文件，不显示源码   | hidden-source-map             | ×                        | ×                           | 文件未尾不引用map文件                 |
-| 生成source map文件，不显示源码   | nosources-source-map          | ×                        | ×                           | 文件未尾不引用map文件                 |
+| 分类              | devtool                       |  描述                                    |
+|-------------------|-------------------------------|-----------------------------------------|
+| 生成source map文件，不显示源码   | hidden-source-map             |  文件未尾不引用map文件                 |
+| 生成source map文件，不显示源码   | nosources-source-map           | 文件未尾不引用map文件                 |
 
 ### 如何手动设置 sourceMap
 
-此时您需要使用到[分离hit和map](core-concepts/separate-hit-and-map)，通过`canyon-uploader`在构建阶段侦测本地的sourceMap文件，Canyon会将他们与覆盖率初始数据匹配上传。
+此时您需要使用到[分离hit和map](/documentation/core-concepts/separate-hit-and-map)，通过`canyon-uploader`在构建阶段侦测本地的sourceMap文件，Canyon会将他们与覆盖率初始数据匹配上传。
 
 > [!NOTE]
 >

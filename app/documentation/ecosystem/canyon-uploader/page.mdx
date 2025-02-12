@@ -12,14 +12,5 @@ Canyon 上报器是一个用于上报覆盖率数据的二进制工具。提供 
 
 ```bash
 chmod +x ./canyon-uploader
-canyon-uploader map --report-id=reportID --case-id=caseID --output-dir=.canyon_output
+canyon-uploader map --report-id=reportID
 ```
-
-## 参数
-
-| 配置项 | 描述 | 是否必需 | 默认值 |
-| ------------- | ----------- | -------- | ------------- |
-| dsn | 覆盖率报告 URL，用于检测的持续集成（CI）流水线变量键为 DSN | 是（在 CI 变量配置中填写或在配置中手动填写） | 无 |
-| provider | 源代码提供方（可选），默认为 GitLab | 可选 | gitlab |
-| projectID | 仓库 ID | 通常无需手动配置（从 CI 提供方自动检测） | 无 |
-| sha | Git 提交的 SHA 值 | 通常无需手动配置（从 CI 提供方自动检测） | 无 |

@@ -2,33 +2,31 @@
 
 ## 概述
 
-Canyon（法语意为 "快速的"，发音 /vit/，发音同 "veet"）Canyon 是一个 JavaScript 代码覆盖率收集平台。我们解决了开发人员和 QA 工程师在端到端测试过程中收集测试用例代码覆盖率时遇到的困难。它由三个主要部分组成：
+Canyon（意为 “峡谷”，发音 /ˈkænjən/）是一个 JavaScript 代码覆盖率收集平台。我们解决了开发人员和 QA 工程师在端到端测试过程中收集测试用例代码覆盖率时遇到的困难。它由三个主要部分组成：
 
-- 负责适配各种CI工具、读取环境变量的一系列插件。
+- 负责适配各种CI提供商、侦测环境变量的一系列 [插件](https://github.com/canyon-project/canyon/tree/main/plugins)。
 
-- 负责收集和处理覆盖率数据的 API 服务。
+- 负责收集处理覆盖率数据，提供后端API的 [nodejs服务](https://github.com/canyon-project/canyon/tree/main/packages/canyon-backend)。
 
-- 一组负责显示覆盖率报告的前端和后端服务。
+- 负责展示覆盖率数据的 [react前端应用](https://github.com/canyon-project/canyon/tree/main/packages/canyon-platform)。
 
 ![](/static/documentation/getting-started/introduction/home-screen.png)
 
 ## 为什么是Canyon?
 
-Canyon 是一款专注于端到端测试覆盖率收集的工具，解决在高并发、分布式的 UI 自动化任务中，准确统计每个测试用例覆盖率的难题。
+Canyon通过在编译阶段分离 hit 和 map 数据，能够高效处理 UI 自动化测试产生的大量覆盖率数据。
 
-它通过在编译阶段分离 hit 和 map 数据，能够高效处理 UI 自动化测试产生的大量覆盖率数据。
+此外，Canyon 适配了常见CI提供商，能够在构建阶段插入探针代码，在 UI 自动化测试阶段收集和上报覆盖率数据。
 
-此外，Canyon 适配了常见持续集成环境，能够在构建阶段插入探针代码，在 UI 自动化测试阶段收集和上报覆盖率数据。
+这使得开发团队能够 __准确__ 、 __实时__ 的了解当前 UI 自动化测试 __每个用例__ 的覆盖率情况，从而更好地评估和提升代码质量。
 
-这使得开发团队能够实时了解当前 UI 自动化测试用例的覆盖率情况，从而更好地评估和提升代码质量。
+### 功能特点
 
-### 功能
-
-- [SourceMap](/documentation/core-concepts/restore-source-code-coverage)：源码覆盖率还原
-- [框架](/documentation/installation/getting-started)：提供常见打包工具、前端框架的覆盖率方案
-- [自动化框架](/documentation/end-to-end-testing/getting-started)：提供常见自动化框架集成方案
-- [CI](/documentation/reference/provider)：适配了常见持续集成环境，侦测CI变量
-- [准确高效](/documentation/core-concepts/separate-hit-and-map)：通过分离hit、map，编译时生成初始覆盖率数据，准确轻松。
+- [准确高效](/documentation/core-concepts/separate-hit-and-map)：通过分离hit、map，编译时生成初始覆盖率数据，准确高效的收集覆盖率数据
+- [SourceMap](/documentation/core-concepts/restore-source-code-coverage)：准确的源码覆盖率还原
+- [构建工具](/documentation/installation/getting-started)：提供next.js、vite、webpack等常见构建工具的覆盖率方案
+- [自动化框架](/documentation/end-to-end-testing/getting-started)：提供常见UI自动化框架集成方案
+- [CI提供商](/documentation/reference/provider)：适配常见CI提供商（Github Actions、GitLab Runner），侦测CI环境变量
 
 
 ### 自托管
@@ -43,10 +41,10 @@ Canyon 是一款专注于端到端测试覆盖率收集的工具，解决在高�
 | [canyon-uploader]     | [![canyon-uploader-status]][canyon-uploader-package]         | 扫描本地 `.canyon_output` 数据并上传到服务器 |
 | [canyon-extension]    | [![canyon-extension-status]][canyon-extension-package]       | Chrome 插件，用于手动上报覆盖率数据          |
 
-[babel-plugin-canyon]: https://github.com/canyon-project/babel-plugin-canyon
+[babel-plugin-canyon]: /documentation/ecosystem/babel-plugin-canyon
 [vite-plugin-canyon]: https://github.com/canyon-project/vite-plugin-canyon
-[canyon-uploader]: https://github.com/canyon-project/canyon-uploader
-[canyon-extension]: https://github.com/canyon-project/canyon-extension
+[canyon-uploader]: /documentation/ecosystem/canyon-uploader
+[canyon-extension]: /documentation/ecosystem/canyon-extension
 [babel-plugin-canyon-status]: https://img.shields.io/npm/v/babel-plugin-canyon.svg
 [vite-plugin-canyon-status]: https://img.shields.io/npm/v/vite-plugin-canyon.svg
 [canyon-uploader-status]: https://img.shields.io/npm/v/canyon-uploader.svg
