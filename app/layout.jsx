@@ -6,6 +6,7 @@ import "nextra-theme-docs/style.css";
 import Image from "next/image";
 import Link from "next/link";
 import { GitHubIcon } from "nextra/icons";
+import { ConfigProvider } from "antd";
 
 export const metadata = {
   // Define your metadata here
@@ -53,16 +54,24 @@ export default async function RootLayout({ children }) {
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
-        <Layout
-          // banner={banner}
-          navbar={navbar}
-          pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
-          footer={footer}
-          // ... Your additional layout options
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#0071c2",
+            },
+          }}
         >
-          {children}
-        </Layout>
+          <Layout
+            // banner={banner}
+            navbar={navbar}
+            pageMap={await getPageMap()}
+            docsRepositoryBase="https://github.com/canyon-project/docs-cn/tree/main"
+            footer={footer}
+            // ... Your additional layout options
+          >
+            {children}
+          </Layout>
+        </ConfigProvider>
       </body>
     </html>
   );
